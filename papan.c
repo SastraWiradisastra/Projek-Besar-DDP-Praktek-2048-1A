@@ -131,14 +131,17 @@ bool move(int board[u][u], char direction) {
 void addNewTile(int *board[u][u]) {
     int empty[size * size][2];
     int emptyCount = 0;
-
+    int choice = rand() % emptyCount;
+        int randomValue = rand() % 10;
+        int value = (randomValue < 9 ) ? 2 : 4;
+        board[empty[choice][0]][empty[choice][1]] = value;
     int i = 0;
     while (i < size) {
         int j = 0;
         while (j < size) {
             if (board[i][j] == 0) {
-                empty[emptyCount][0] = i;
-                empty[emptyCount][1] = j;
+                empty[emptyCount][0] = value;
+                empty[emptyCount][1] = value;
                 emptyCount++;
             }
             j++;
@@ -146,10 +149,5 @@ void addNewTile(int *board[u][u]) {
         i++;
     }
 
-    if (emptyCount > 0) {
-        int choice = rand() % emptyCount;
-        int randomValue = rand() % 10;
-        int value = (randomValue < 9 ) ? 2 : 4;
-        board[empty[choice][0]][empty[choice][1]] = value;
-    }
+        
 }
