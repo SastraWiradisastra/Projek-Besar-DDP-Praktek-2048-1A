@@ -10,16 +10,16 @@ oleh qinthara azizah tsurayya
 #include "papan.h"
 
 int main() {
-    int size;
+    int board[SIZE][SIZE];
     char input;
     bool moved;
-    initializeBoard(board, size);
+
+    init(board);
 
     while (true) {
         system("cls"); //"cls" windows, "clear" linux
-        displayBoard(board, size);
 
-        if (isGameOver(board, size)) {
+        if (isGameOver(board)) {
             printf("Game Over! Try again.\n");
             break;
         }
@@ -27,18 +27,11 @@ int main() {
         printf("Enter move (w/a/s/d): ");
         scanf(" %c", &input);
 
-        moved = move(board, size, input);
+        moved = move(board, input);
         if (moved) {
-            addNewTile(board, size);
+            addNewTile(board);
         }
     }
-
-    i = 0; 
-    while (i < size) {
-        free(board[i]);
-        i++;
-    }
-    free(board);
 
     return 0;
 }
