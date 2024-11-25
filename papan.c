@@ -103,26 +103,22 @@ bool check(int *board[u][u]) {
 bool move(int board[u][u], char direction) {
     bool moved = false;
 
-    void transpose(&board[u][u]);
-    void reverseRows(&board[u][u]);
-    bool check(int &board[u][u]);
-
     if (direction == 'w') {
-        transpose(board, size);
-        moved = check(board, size);
-        transpose(board, size);
+        transpose(&board, size);
+        moved = check(&board, size);
+        transpose(&board, size);
     } else if (direction == 'a') {
-        moved = check(board, size);
+        moved = check(&board, size);
     } else if (direction == 's') {
-        transpose(board, size);
-        reverseRows(board, size);
-        moved = check(board, size);
-        reverseRows(board, size);
-        transpose(board, size);
+        transpose(&board, size);
+        reverseRows(&board, size);
+        moved = check(&board, size);
+        reverseRows(&board, size);
+        transpose(&board, size);
     } else if (direction == 'd') {
-        reverseRows(board, size);
-        moved = check(board, size);
-        reverseRows(board, size);
+        reverseRows(&board, size);
+        moved = check(&board, size);
+        reverseRows(&board, size);
     }
 
     return moved;
