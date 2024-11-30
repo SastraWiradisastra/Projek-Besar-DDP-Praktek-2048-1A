@@ -105,21 +105,21 @@ bool move(int board[u][u], char direction) {
     bool moved = false;
 
     if (direction == 'w') {
-        transpose(&board, size);
-        moved = check(&board, size);
-        transpose(&board, size);
+        transpose(&board);
+        moved = check(&board);
+        transpose(&board);
     } else if (direction == 'a') {
-        moved = check(&board, size);
+        moved = check(&board);
     } else if (direction == 's') {
-        transpose(&board, size);
-        reverseRows(&board, size);
-        moved = check(&board, size);
-        reverseRows(&board, size);
-        transpose(&board, size);
+        transpose(&board);
+        reverseRows(&board);
+        moved = check(&board);
+        reverseRows(&board);
+        transpose(&board);
     } else if (direction == 'd') {
-        reverseRows(&board, size);
-        moved = check(&board, size);
-        reverseRows(&board, size);
+        reverseRows(&board);
+        moved = check(&board);
+        reverseRows(&board);
     }
 
     return moved;
