@@ -11,8 +11,7 @@ void addNewTile(int *board[u][u]);
 bool isGameOver(int *board[u][u]);
 void transpose(int *board[u][u]);
 void reverse(int *board[u][u]);
-void check(int *board[u][u]);
-void hitungSkor(int *jumlah);
+void check(int board[u][u], int *jumlahscore);
 int tampScore(int jumlah);
 
 #endif
