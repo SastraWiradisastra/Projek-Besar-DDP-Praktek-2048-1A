@@ -4,16 +4,16 @@
 
 void initializeBoard(int board[u][u]) {
     int i = 0;
-    while (i < size) {
+    while (i < 4) {
         int j = 0;
-        while (j < size) {
+        while (j < 4) {
             board[i][j] = 0;
             j++;
         }
         i++;
     }
-    addNewTile(board, size);
-    addNewTile(board, size);
+    addNewTile(board[u][u]);
+    addNewTile(board[u][u]);
 }
 
 void displayBoard(int board[u][u]) {
@@ -34,9 +34,9 @@ bool isGameOver(int board[u][u]) {
     while (i < size) {
         int j = 0;
         while (j < size) {
-            if (board[i][j] == 0) return false;
-            if (i > 0 && board[i][j] == board[i - 1][j]) return false;
-            if (j > 0 && board[i][j] == board[i][j - 1]) return false;
+            if (board[i][j] == 0) {return false;}
+            if (i > 0 && board[i][j] == board[i - 1][j]) {return false;}
+            if (j > 0 && board[i][j] == board[i][j - 1]) {return false;}
             j++;
         }
         i++;
