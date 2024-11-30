@@ -18,9 +18,9 @@ void initializeBoard(int board[u][u]) {
 
 void displayBoard(int board[u][u]) {
     int i = 0;
-    while (i < size) {
+    while (i < 4) {
         int j = 0;
-        while (j < size) {
+        while (j < 4) {
             printf("%4d ", board[i][j]);
             j++;
         }
@@ -31,9 +31,9 @@ void displayBoard(int board[u][u]) {
 
 bool isGameOver(int board[u][u]) {
     int i = 0;
-    while (i < size) {
+    while (i < 4) {
         int j = 0;
-        while (j < size) {
+        while (j < 4) {
             if (board[i][j] == 0) {return false;}
             if (i > 0 && board[i][j] == board[i - 1][j]) {return false;}
             if (j > 0 && board[i][j] == board[i][j - 1]) {return false;}
@@ -45,9 +45,9 @@ bool isGameOver(int board[u][u]) {
 }
 void transpose(int *board[u][u]) {
         int i = 0;
-        while (i < size) {
+        while (i < 4) {
             int j = i + 1;
-            while (j < size) {
+            while (j < 4) {
                 int temp = b[i][j];
                 b[i][j] = b[j][i];
                 b[j][i] = temp;
@@ -58,9 +58,9 @@ void transpose(int *board[u][u]) {
     }
 void reverseRows(int *board[u][u]) {
         int i = 0;
-        while (i < size) {
+        while (i < 4) {
             int j = 0;
-            while (j < size / 2) {
+            while (j < 4 / 2) {
                 int temp = b[i][j];
                 b[i][j] = b[i][size - 1 - j];
                 b[i][size - 1 - j] = temp;
@@ -72,10 +72,10 @@ void reverseRows(int *board[u][u]) {
 void check(int board[u][u], int *jumlahscore) {
         bool hasMoved = false;
         int i = 0;
-        while (i < size) {
+        while (i < 4) {
             int lastMergeCol = -1;
             int j = 1;
-            while (j < size) {
+            while (j < 4) {
                 if (b[i][j] == 0) {
                     j++;
                     continue;
@@ -133,9 +133,9 @@ void addNewTile(int *board[u][u]) {
         int value = (randomValue < 9 ) ? 2 : 4;
         board[empty[choice][0]][empty[choice][1]] = value;
     int i = 0;
-    while (i < size) {
+    while (i < 4) {
         int j = 0;
-        while (j < size) {
+        while (j < 4) {
             if (board[i][j] == 0) {
                 empty[emptyCount][0] = value;
                 empty[emptyCount][1] = value;
