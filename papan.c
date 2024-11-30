@@ -69,7 +69,7 @@ void reverseRows(int *board[u][u]) {
             i++;
         }
     }
-bool check(int *board[u][u]) {
+void check(int board[u][u], int *jumlahscore) {
         bool hasMoved = false;
         int i = 0;
         while (i < size) {
@@ -88,6 +88,7 @@ bool check(int *board[u][u]) {
                     b[i][j] = 0; //kembali
                     hasMoved = true;
                     lastMergeCol = k;
+                    jumlahscore = b[i][k];
                 } else if (k + 1 != j) {
                     b[i][k + 1] = b[i][j];
                     b[i][j] = 0;
@@ -144,6 +145,8 @@ void addNewTile(int *board[u][u]) {
         }
         i++;
     }
+}
 
-        
+int tampScore(int jumlahscore) {
+	printf("Score: %d", jumlahscore);
 }
