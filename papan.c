@@ -88,7 +88,7 @@ void check(int board[u][u], int *jumlahscore) {
                     b[i][j] = 0; //kembali
                     hasMoved = true;
                     lastMergeCol = k;
-                    jumlahscore = b[i][k];
+                    jumlahscore += b[i][k];
                 } else if (k + 1 != j) {
                     b[i][k + 1] = b[i][j];
                     b[i][j] = 0;
@@ -125,26 +125,31 @@ bool move(int board[u][u], char direction) {
     return moved;
 }
 
-void addNewTile(int *board[u][u]) {
-    int empty[size * size][2];
+#include <stdlib.h>
+#include <time.h>
+
+void addNewTile(int board[u][u]) {
+    int empty[u * u][2]; 
     int emptyCount = 0;
-    int choice = rand() % emptyCount;
-        int randomValue = rand() % 10;
-        int value = (randomValue < 9 ) ? 2 : 4;
-        board[empty[choice][0]][empty[choice][1]] = value;
-    int i = 0;
-    while (i < 4) {
-        int j = 0;
-        while (j < 4) {
+
+    for (int i = 0; i < u; i++) {
+        for (int j = 0; j < u; j++) {
             if (board[i][j] == 0) {
-                empty[emptyCount][0] = value;
-                empty[emptyCount][1] = value;
+                empty[emptyCount][0] = i;
+                empty[emptyCount][1] = j; 
                 emptyCount++;
             }
-            j++;
         }
-        i++;
     }
+
+    if (emptyCount == 0) {
+        return;
+    }
+    int choice = rand() % emptyCount;
+
+    int randomValue = rand() % 10;
+    int value = (randomValue < 9) ? 2 : 4; 
+    board[empty[choice][0]][empty[choice][1]] = value;
 }
 
 int tampScore(int jumlahscore) {
