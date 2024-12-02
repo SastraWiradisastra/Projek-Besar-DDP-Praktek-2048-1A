@@ -62,8 +62,8 @@ void reverseRows(int *board[u][u]) {
             int j = 0;
             while (j < 4 / 2) {
                 int temp = b[i][j];
-                b[i][j] = b[i][size - 1 - j];
-                b[i][size - 1 - j] = temp;
+                b[i][j] = b[i][u - 1 - j];
+                b[i][u - 1 - j] = temp;
                 j++;
             }
             i++;
@@ -106,27 +106,24 @@ bool move(int board[u][u], char direction) {
 
     if (direction == 'w') {
         transpose(&board);
-        moved = check(&board);
+        moved = check(board);
         transpose(&board);
     } else if (direction == 'a') {
-        moved = check(&board);
+        moved = check(board);
     } else if (direction == 's') {
         transpose(&board);
         reverseRows(&board);
-        moved = check(&board);
+        moved = check(board);
         reverseRows(&board);
         transpose(&board);
     } else if (direction == 'd') {
         reverseRows(&board);
-        moved = check(&board);
+        moved = check(board);
         reverseRows(&board);
     }
 
     return moved;
 }
-
-#include <stdlib.h>
-#include <time.h>
 
 void addNewTile(int board[u][u]) {
     int empty[u * u][2]; 
