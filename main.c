@@ -23,7 +23,7 @@ int main() {
 
         printf("Enter move (w/a/s/d): ");
         scanf(" %c", &input);
-        if ((input != 'w' && input != 'a' && input != 's' && input != 'd') || (input != 'W' && input != 'A' && input != 'S' && input != 'D')) {
+        if ((input != 'w' && input != 'a' && input != 's' && input != 'd') && (input != 'W' && input != 'A' && input != 'S' && input != 'D')) {
         printf("Invalid move! Please enter w/a/s/d.\n");
         continue;
         }
