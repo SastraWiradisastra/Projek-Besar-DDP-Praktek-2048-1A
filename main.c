@@ -5,10 +5,6 @@ oleh qinthara azizah tsurayya
 - tile baru bisa 2/4
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "papan.h"
-
 int main() {
     int board[u][u];
     char input;
