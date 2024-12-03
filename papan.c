@@ -98,19 +98,19 @@ bool move(int board[u][u], char direction) {
     bool moved = false;
 
     
-    if (direction == 'w') {
+    if (direction == 'w' || direction == 'W') {
         transpose(board);
         moved = check(board);
         transpose(board);
-    } else if (direction == 'a') {
+    } else if (direction == 'a' || direction == 'A') {
         moved = check(board);
-    } else if (direction == 's') {
+    } else if (direction == 's' || direction == 'S') {
         transpose(board);
         reverseRows(board);
         moved = check(board);
         reverseRows(board);
         transpose(board);
-    } else if (direction == 'd') {
+    } else if (direction == 'd' || direction == 'D') {
         reverseRows(board);
         moved = check(board);
         reverseRows(board);
