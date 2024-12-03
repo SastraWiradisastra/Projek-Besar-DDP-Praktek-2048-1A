@@ -10,7 +10,7 @@ oleh qinthara azizah tsurayya
 #include "papan.h"
 
 int main() {
-    int board[SIZE][SIZE];
+    int board[u][u];
     char input;
     bool moved;
 
@@ -20,7 +20,7 @@ int main() {
         system("cls"); //"cls" windows, "clear" linux
 
         if (isGameOver(board)) {
-            printf("Game Over! Try again.\n");
+            printf("Game Over!\n");
             break;
         }
 
