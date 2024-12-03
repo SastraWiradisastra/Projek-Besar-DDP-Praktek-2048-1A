@@ -17,7 +17,8 @@ int main() {
     init(board);
 
     while (true) {
-        system("cls"); //"cls" windows, "clear" linux
+        system('clear'); //"cls" windows, "clear" linux
+        displayBoard(board);
 
         if (isGameOver(board)) {
             printf("Game Over!\n");
@@ -26,6 +27,10 @@ int main() {
 
         printf("Enter move (w/a/s/d): ");
         scanf(" %c", &input);
+        if ((input != 'w' && input != 'a' && input != 's' && input != 'd') || (input != 'W' && input != 'A' && input != 'S' && input != 'D')) {
+        printf("Invalid move! Please enter w/a/s/d.\n");
+        continue;
+        }
 
         moved = move(board, input);
         if (moved) {
