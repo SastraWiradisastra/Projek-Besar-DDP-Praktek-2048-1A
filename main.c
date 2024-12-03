@@ -4,6 +4,7 @@ oleh qinthara azizah tsurayya
 - tile baru acak
 - tile baru bisa 2/4
 */
+#include "papan.h"
 
 int main() {
     int board[u][u];
