@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int jumlahScorre = 0;
+
 void initializeBoard(int board[u][u]) {
     int i = 0;
     while (i < 4) {
@@ -43,87 +45,83 @@ bool isGameOver(int board[u][u]) {
     }
     return true;
 }
-void transpose(int *board[u][u]) {
-        int i = 0;
-        while (i < 4) {
-            int j = i + 1;
-            while (j < 4) {
-                int temp = b[i][j];
-                b[i][j] = b[j][i];
-                b[j][i] = temp;
-                j++;
-            }
-            i++;
-        }
-    }
-void reverseRows(int *board[u][u]) {
-        int i = 0;
-        while (i < 4) {
-            int j = 0;
-            while (j < 4 / 2) {
-                int temp = b[i][j];
-                b[i][j] = b[i][u - 1 - j];
-                b[i][u - 1 - j] = temp;
-                j++;
-            }
-            i++;
-        }
-    }
-void check(int board[u][u], int *jumlahscore) {
-        bool hasMoved = false;
-        int i = 0;
-        while (i < 4) {
-            int lastMergeCol = -1;
-            int j = 1;
-            while (j < 4) {
-                if (b[i][j] == 0) {
-                    j++;
-                    continue;
-                }
-                int k = j - 1;
-                while (k >= 0 && b[i][k] == 0) k--;
 
-                if (k >= 0 && b[i][k] == b[i][j] && lastMergeCol != k) {
-                    b[i][k] *= 2;
-                    b[i][j] = 0; //kembali
-                    hasMoved = true;
-                    lastMergeCol = k;
-                    jumlahscore += b[i][k];
-                } else if (k + 1 != j) {
-                    b[i][k + 1] = b[i][j];
-                    b[i][j] = 0;
-                    hasMoved = true;
-                }
-                j++;
+void tampSkor() {
+    printf("Score: %d\n", jumlahscore);
+}
+bool check(int board[u][u]) {
+    bool hasMoved = false;
+    for (int i = 0; i < u; i++) {
+        int lastMergeCol = -1;
+        for (int j = 1; j < u; j++) {
+            if (board[i][j] == 0) {
+                continue;
             }
-            i++;
+            int k = j - 1;
+            while (k >= 0 && board[i][k] == 0) k--;
+
+            if (k >= 0 && board[i][k] == board[i][j] && lastMergeCol != k) {
+                board[i][k] *= 2; 
+                board[i][j] = 0; 
+                hasMoved = true;
+                lastMergeCol = k;
+                jumlahscore += board[i][k];
+                tampSkor(); 
+            } else if (k + 1 != j) {
+                board[i][k + 1] = board[i][j];
+                board[i][j] = 0;
+                hasMoved = true;
+            }
         }
-        return hasMoved;
     }
+    return hasMoved;
+}
+
+void transpose(int board[u][u]) {
+    for (int i = 0; i < u; i++) {
+        for (int j = i + 1; j < u; j++) {
+            int temp = board[i][j];
+            board[i][j] = board[j][i];
+            board[j][i] = temp;
+        }
+    }
+}
+
+void reverseRows(int board[u][u]) {
+    for (int i = 0; i < u; i++) {
+        for (int j = 0; j < u / 2; j++) {
+            int temp = board[i][j];
+            board[i][j] = board[i][u - 1 - j];
+            board[i][u - 1 - j] = temp;
+        }
+    }
+}
 
 bool move(int board[u][u], char direction) {
     bool moved = false;
 
+    
     if (direction == 'w') {
-        transpose(&board);
+        transpose(board);
         moved = check(board);
-        transpose(&board);
+        transpose(board);
     } else if (direction == 'a') {
         moved = check(board);
     } else if (direction == 's') {
-        transpose(&board);
-        reverseRows(&board);
+        transpose(board);
+        reverseRows(board);
         moved = check(board);
-        reverseRows(&board);
-        transpose(&board);
+        reverseRows(board);
+        transpose(board);
     } else if (direction == 'd') {
-        reverseRows(&board);
+        reverseRows(board);
         moved = check(board);
-        reverseRows(&board);
+        reverseRows(board);
     }
 
     return moved;
 }
+
 
 void addNewTile(int board[u][u]) {
     int empty[u * u][2]; 
@@ -149,6 +147,3 @@ void addNewTile(int board[u][u]) {
     board[empty[choice][0]][empty[choice][1]] = value;
 }
 
-int tampScore(int jumlahscore) {
-	printf("Score: %d", jumlahscore);
-}
