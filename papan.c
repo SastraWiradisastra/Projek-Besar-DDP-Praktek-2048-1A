@@ -1,8 +1,8 @@
-#include "papan.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
-int jumlahScorre = 0;
+int jumlahskor = 0;
 
 void init(int board[u][u]) {
     int i = 0;
@@ -46,9 +46,6 @@ bool isGameOver(int board[u][u]) {
     return true;
 }
 
-void tampSkor() {
-    printf("Score: %d\n", jumlahscore);
-}
 bool check(int board[u][u]) {
     bool hasMoved = false;
     for (int i = 0; i < u; i++) {
@@ -65,8 +62,7 @@ bool check(int board[u][u]) {
                 board[i][j] = 0; 
                 hasMoved = true;
                 lastMergeCol = k;
-                jumlahscore += board[i][k];
-                tampSkor(); 
+                jumlahskor += board[i][k];
             } else if (k + 1 != j) {
                 board[i][k + 1] = board[i][j];
                 board[i][j] = 0;
@@ -74,6 +70,7 @@ bool check(int board[u][u]) {
             }
         }
     }
+    printf("Score: %d\n", jumlahskor);
     return hasMoved;
 }
 
@@ -146,4 +143,3 @@ void addNewTile(int board[u][u]) {
     int value = (randomValue < 9) ? 2 : 4; 
     board[empty[choice][0]][empty[choice][1]] = value;
 }
-
