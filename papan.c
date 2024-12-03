@@ -4,7 +4,7 @@
 
 int jumlahScorre = 0;
 
-void initializeBoard(int board[u][u]) {
+void init(int board[u][u]) {
     int i = 0;
     while (i < 4) {
         int j = 0;
@@ -14,8 +14,8 @@ void initializeBoard(int board[u][u]) {
         }
         i++;
     }
-    addNewTile(board[u][u]);
-    addNewTile(board[u][u]);
+    addNewTile(board);
+    addNewTile(board);
 }
 
 void displayBoard(int board[u][u]) {
