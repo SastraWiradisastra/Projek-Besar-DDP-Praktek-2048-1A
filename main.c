@@ -34,6 +34,24 @@ int main() {
             addNewTile(board);
         }
     }
+dataplayer      maindata;
+int             i = 0;
 
+    while(i < 5)
+    {
+        printf("Masukan highscore: \n");
+        scanf("%d", &maindata.skor);
+        fflush(stdin);
+        printf("Masukan nama: \n");
+        scanf("%s", maindata.nama);
+        fflush(stdin);
+
+        inputscore(maindata);
+        ++i;
+    }
+
+    sorting();
+    
     return 0;
 }
+
