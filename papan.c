@@ -51,6 +51,7 @@ bool isGameOver(int board[u][u]) {
             if (board[i][j] == 0) {return false;}
             if (i > 0 && board[i][j] == board[i - 1][j]) {return false;}
             if (j > 0 && board[i][j] == board[i][j - 1]) {return false;}
+            if (board[i][j] == 2048) {return false;}
             j++;
         }
         i++;
