@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 //deklarasi tipe data baru bernama dataplayer
 typedef struct {int skor; char nama[15];} dataplayer;
 
 void inputscore(dataplayer input)
 {
-
     FILE* forinput = fopen("datahighscore.txt", "a+");
 
     if(forinput == NULL)
@@ -18,7 +18,6 @@ void inputscore(dataplayer input)
 
     fprintf(forinput, "%d %s\n", input.skor, input.nama);
     fclose(forinput);
-
 }
 
 void tampil()
@@ -46,7 +45,6 @@ void tampil()
 
 void sorting()
 {
-
     //input local
     long i = 0, j;
     dataplayer yangdibaca, temp;
@@ -55,7 +53,8 @@ void sorting()
     if (baca == NULL)
     {
         perror("File tidak bisa diakses");
-        exit(1);
+        sleep(3);
+        return;
     }
 
     while(!feof(baca))
@@ -88,5 +87,4 @@ void sorting()
 
     fclose(baca);
     tampil();
-
 }

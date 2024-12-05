@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#define u 4
 
 int jumlahskor = 0;
+
+void addNewTile(int board[u][u]);
 
 void init(int board[u][u]) {
     int i = 0;
@@ -19,14 +22,23 @@ void init(int board[u][u]) {
 }
 
 void displayBoard(int board[u][u]) {
+    printf("Score: %d\n", jumlahskor);
+    printf("\t ___________________________\n");
     int i = 0;
     while (i < 4) {
         int j = 0;
-        while (j < 4) {
-            printf("%4d ", board[i][j]);
+        printf("\t|      |      |      |      |\n");
+        printf("\t|");
+        while(j < 4)
+        {
+            if(board[i][j] != 0)
+                printf(" %-4d |", board[i][j]);
+            else
+                printf("      |");
             j++;
         }
-        printf("\n");
+        printf("\n\t|      |      |      |      |\n");
+        printf("\t ___________________________\n");
         i++;
     }
 }
@@ -70,7 +82,6 @@ bool check(int board[u][u]) {
             }
         }
     }
-    printf("Score: %d\n", jumlahskor);
     return hasMoved;
 }
 
@@ -97,7 +108,6 @@ void reverseRows(int board[u][u]) {
 bool move(int board[u][u], char direction) {
     bool moved = false;
 
-    
     if (direction == 'w' || direction == 'W') {
         transpose(board);
         moved = check(board);
@@ -119,7 +129,6 @@ bool move(int board[u][u], char direction) {
     return moved;
 }
 
-
 void addNewTile(int board[u][u]) {
     int empty[u * u][2]; 
     int emptyCount = 0;
@@ -137,8 +146,8 @@ void addNewTile(int board[u][u]) {
     if (emptyCount == 0) {
         return;
     }
+    
     int choice = rand() % emptyCount;
-
     int randomValue = rand() % 10;
     int value = (randomValue < 9) ? 2 : 4; 
     board[empty[choice][0]][empty[choice][1]] = value;
