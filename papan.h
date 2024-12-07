@@ -13,6 +13,5 @@ bool isWin(int board[u][u]);
 void transpose(int board[u][u]);
 void reverse(int board[u][u]);
 bool check(int board[u][u]);
-int tampScore();
 
 #endif
