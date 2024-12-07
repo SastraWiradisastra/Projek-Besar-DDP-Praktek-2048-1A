@@ -3,6 +3,9 @@
 
 void displayTitle();
 void displayMainMenu();
+void displayPlayMenu();
 void displayHelpMenu();
+void displayWin();
+void displayGameOver();
 
 #endif
