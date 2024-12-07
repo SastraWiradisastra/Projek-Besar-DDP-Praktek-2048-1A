@@ -9,6 +9,7 @@ oleh qinthara azizah tsurayya
 #include <conio.h>
 #include "papan.h"
 #include "save.h"
+#include "display.h"
 
 int main() {
     int board[u][u];
@@ -19,11 +20,8 @@ int main() {
     {
         printf("\e[?25l");
         system("cls");
-        printf("\n==============(2048)=============\n");
-        printf("|\t(p) Play\t\t|\n");
-        printf("|\t(h) Display Highscore\t|\n");
-        printf("|\t(q) Quit\t\t|\n");
-        printf("=================================\n");
+        displayTitle();
+        displayMainMenu();
         input = getch();
 
         init(board);
@@ -32,14 +30,30 @@ int main() {
             case 'p':
                 while (true) 
                 {
-                    system("cls"); //"cls" windows, "clear" linux
+                    system("cls");
+                    displayTitle();
+                    printf("\n\tTekan (h) untuk panduan kontrol\n");
+                    printf("\n\tTekan (b) untuk kembali ke main menu\n");
                     displayBoard(board);
 
                     if (isGameOver(board) == true) {
                         extern int jumlahskor;
-                        printf("Game Over!\n");
-                        printf("Skor terkakhir: %d\n", jumlahskor);
-                        sleep(3);
+                        dataplayer finalscore;
+                        finalscore.skor = jumlahskor;
+                        jumlahskor = 0;
+                        
+                        printf("\n\tGame Over!\n");
+                        printf("\tSkor terkakhir\t\t: %d\n", finalscore.skor);
+                        printf("\tMasukan nama anda (Maks. 15 karakter)\t: ");
+                        scanf("%s", finalscore.nama);
+                        
+                        inputscore(finalscore);
+
+                        printf("\t\n#===============================#");
+                        printf("\t\n| Skor telah berhasil disimpan! |");
+                        printf("\t\n#===============================#\n");
+                        sleep(1);
+
                         break;
                     }
 
@@ -52,33 +66,63 @@ int main() {
                             addNewTile(board);
                         }
                     }
-                    else if(input == 'b' || input == 'B')
+                    else if(input == 'r' || input == 'R')
                     {
-                        system("cls");
+                        extern int jumlahskor;
+                        jumlahskor = 0;
+                        init(board);
+                    }
+                    else if(input == 'b' || input == 'B')
                         break;
+                    else if(input == 'h' || input == 'H')
+                    {
+                        while(input != 'b')
+                        {
+                            system("cls");
+                            displayTitle();
+                            printf("\n\t\b\bTekan (b) untuk kembali ke game\n");
+                            displayHelpMenu();
+                            input = getch();
+                    
+                            if(input != 'b')
+                            {
+                                printf("\nInput invalid! Silahkan coba lagi.");
+                                sleep(1);
+                            }
+                        }
                     }
                     else
                     {
-                        printf("Invalid move! Please enter w/a/s/d.\n");
+                        printf("\t\nInput invalid! Silahkan coba lagi.");
                         sleep(1);
                         continue;
                     }
                 }
                 break;
             case 'h':
-                system("cls");
-                sorting();
+                while(input != 'b')
+                {
+                    system("cls");
+                    displayTitle();
+                    printf("\n\t\b\b\bTekan (b) untuk kembali ke main menu\n\n");
+                    tampil();
+                    input = getch();
+                    
+                    if(input != 'b')
+                    {
+                        printf("\nInput invalid! Silahkan coba lagi.");
+                        sleep(1);
+                    }
+                }
                 break;
             case 'q':
                 system("cls");
                 exit(0);
             default:
-                system("cls");
-                printf("Input invalid, silahkan coba lagi.");
+                printf("\nInput invalid! Silahkan coba lagi.");
                 sleep(1);
                 break;
         }
     }
     return 0;
 }
-
