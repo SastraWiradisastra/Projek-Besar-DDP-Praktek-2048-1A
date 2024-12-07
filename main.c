@@ -95,7 +95,11 @@ int main() {
                         init(board);
                     }
                     else if(input == 'b' || input == 'B')
+                    {
+                        extern int jumlahskor;
+                        jumlahskor = 0;
                         break;
+                    }
                     else if(input == 'h' || input == 'H')
                     {
                         while(input != 'b')
