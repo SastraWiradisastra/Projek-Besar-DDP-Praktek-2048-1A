@@ -1,9 +1,3 @@
-/*
-oleh qinthara azizah tsurayya
-- ukuran board input user
-- tile baru acak
-- tile baru bisa 2/4
-*/
 #include <stdio.h>
 #include <unistd.h>
 #include <conio.h>
@@ -40,16 +34,22 @@ int main() {
                     if (isWin(board) == true && win == false)
                     {
                         win = true;
-                        printf("\n\tYou win! Lanjutkan permainan (y/n)?\n");
+                        system("cls");
+                        displayWin();
+                        printf("\tLanjutkan permainan (y/n)?\n");
                         input = getch();
 
                         while(input != 'y')
                         {
                             if(input == 'n')
+                            {
                                 return cont = true;
+                                break;
+                            }
                             else
                             {
                                 printf("\t\nInput invalid! Silahkan coba lagi.");
+                                input = getch();
                                 continue;
                             }
                         }
@@ -64,17 +64,19 @@ int main() {
                         finalscore.skor = jumlahskor;
                         jumlahskor = 0;
                         
-                        printf("\n\tGame Over!\n");
+                        system("cls");
+                        displayGameOver();
                         printf("\tSkor terkakhir\t\t: %d\n", finalscore.skor);
-                        printf("\tMasukan nama anda (Maks. 15 karakter)\t: ");
+                        printf("\tMasukan nama anda\t: ");
                         scanf("%s", finalscore.nama);
-                        
+
                         inputscore(finalscore);
 
-                        printf("\t\n#===============================#");
-                        printf("\t\n| Skor telah berhasil disimpan! |");
-                        printf("\t\n#===============================#\n");
-                        sleep(1);
+                        printf("\n\t#===============================#");
+                        printf("\n\t| Skor telah berhasil disimpan! |");
+                        printf("\n\t#===============================#\n");
+                        
+                        sleep(3);
 
                         break;
                     }
