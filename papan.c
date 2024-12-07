@@ -22,9 +22,8 @@ void init(int board[u][u]) {
 }
 
 void displayBoard(int board[u][u]) {
-    printf("Score: %d\n", jumlahskor);
-    printf("\t ___________________________\n");
     int i = 0;
+    printf("\n\t#======#======#======#======#\n");
     while (i < 4) {
         int j = 0;
         printf("\t|      |      |      |      |\n");
@@ -38,9 +37,13 @@ void displayBoard(int board[u][u]) {
             j++;
         }
         printf("\n\t|      |      |      |      |\n");
-        printf("\t ___________________________\n");
+        printf("\t#======#======#======#======#\n");
         i++;
     }
+    
+    printf("\n\t#=============#=============#\n");
+    printf("\t| Skor        | %11d |", jumlahskor);
+    printf("\n\t#=============#=============#\n");
 }
 
 bool isGameOver(int board[u][u]) {
@@ -51,12 +54,24 @@ bool isGameOver(int board[u][u]) {
             if (board[i][j] == 0) {return false;}
             if (i > 0 && board[i][j] == board[i - 1][j]) {return false;}
             if (j > 0 && board[i][j] == board[i][j - 1]) {return false;}
-            if (board[i][j] == 2048) {return true;}
             j++;
         }
         i++;
     }
     return true;
+}
+
+bool isWin(int board[u][u]) {
+	int i = 0;
+	while (i < 4) {
+		int j = 0;
+		while (j < 4) {
+			if (board[i][j] == 2048) {return true;}
+			j++;
+		}
+		i++;
+	}
+	return false;
 }
 
 bool check(int board[u][u]) {
