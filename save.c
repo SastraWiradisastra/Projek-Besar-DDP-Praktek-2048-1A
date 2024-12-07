@@ -4,11 +4,14 @@
 #include <unistd.h>
 
 //deklarasi tipe data baru bernama dataplayer
-typedef struct {int skor; char nama[15];} dataplayer;
+typedef struct {
+    int skor; 
+    char nama[15];
+} dataplayer;
 
 void inputscore(dataplayer input)
 {
-    FILE* forinput = fopen("datahighscore.txt", "a+");
+    FILE* forinput = fopen("datahighscore.txt", "ab+");
 
     if(forinput == NULL)
     {
@@ -16,75 +19,61 @@ void inputscore(dataplayer input)
         exit(1);
     }
 
-    fprintf(forinput, "%d %s\n", input.skor, input.nama);
+    fwrite(&input, sizeof(dataplayer), 1, forinput);
     fclose(forinput);
+}
+
+void sorting(dataplayer data[], int y)
+{
+    dataplayer tmpData;
+    int a, b;
+
+    for(a = 0; a < y-1; a++)
+    {
+        for(b = 0;  b < y-1; b++)
+        {
+            if(data[b+1].skor > data[b].skor)
+            {
+                tmpData = data[b];
+                data[b] = data[b+1];
+                data[b+1] = tmpData;
+            }
+        }
+    }
 }
 
 void tampil()
 {
-    dataplayer tampscore;
+    dataplayer tampscore[100];
+    int x, y = 0;
 
-    FILE* filein = fopen("datahighscore.txt", "r");
+    FILE* filein = fopen("datahighscore.txt", "rb");
 
     if(filein == NULL)
     {
-        perror("File tidak dapat dibuka");
-        exit(1);
+        perror("File highscore tidak ditemukan!");
+        sleep(1);
+        return; 
     }
-
-    printf("Score\tNama");
-
-    while(!feof(filein))
+    else
     {
-        fscanf(filein, "%d %s", &tampscore.skor, &tampscore.nama);
-        printf("%d\t%s\n", tampscore.skor, tampscore.nama);
+        while(fread(&tampscore[y], sizeof(dataplayer), 1, filein))
+            y++;
+
+        fclose(filein);
+
+        sorting(tampscore, y);
+        
+        printf("\t\b\b\b#=================================#\n");
+        printf("\t\b\b\b|           Leaderboard           |\n");
+        printf("\t\b\b\b#=================================#\n\n");
+        printf("\t\b\b\b#====#=================#==========#\n");
+        printf("\t\b\b\b| No | Nama            | Skor     |\n");
+        printf("\t\b\b\b#====#=================#==========#\n");
+        for(x = 0; x < y; x++)
+            printf("\t\b\b\b| %-2d | %-15s | %-8d |\n", x+1, tampscore[x].nama, tampscore[x].skor);
+        printf("\t\b\b\b#====#=================#==========#\n");
     }
 
     fclose(filein);
-}
-
-void sorting()
-{
-    //input local
-    long i = 0, j;
-    dataplayer yangdibaca, temp;
-    FILE* baca = fopen("datahighscore.txt","r+");
-
-    if (baca == NULL)
-    {
-        perror("File tidak bisa diakses");
-        sleep(3);
-        return;
-    }
-
-    while(!feof(baca))
-    {
-        fseek(baca, (i*(sizeof(dataplayer)+1))+i, SEEK_SET);
-        fscanf(baca, "%d %s", &yangdibaca.skor, &yangdibaca.nama);
-            j = i;
-            while (!feof)
-            {
-                j++;
-                fseek(baca, (j*(sizeof(dataplayer)+1))+j, SEEK_SET);
-                fscanf(baca, "%d %s", &temp.skor, &temp.nama);
-
-                if((yangdibaca.skor < temp.skor) || (yangdibaca.skor == temp.skor))
-                {
-                    fseek(baca, (i*(sizeof(dataplayer)+1))+i, SEEK_SET);
-                    fprintf(baca, "%d %s", temp.skor, temp.nama);
-                    fseek(baca, (j*(sizeof(dataplayer)+1))+j, SEEK_SET);
-                    fprintf(baca, "%d %s", yangdibaca.skor, yangdibaca.nama);
-                    strcpy(yangdibaca.nama, temp.nama);
-                }
-
-                if(i < j)
-                {
-                    fseek(baca, 0, SEEK_SET);
-                    i++;
-                }
-            }
-    }
-
-    fclose(baca);
-    tampil();
 }
