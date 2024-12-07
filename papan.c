@@ -5,8 +5,6 @@
 
 int jumlahskor = 0;
 
-void addNewTile(int board[u][u]);
-
 void init(int board[u][u]) {
     int i = 0;
     while (i < 4) {
