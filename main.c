@@ -28,15 +28,37 @@ int main() {
         switch(input)
         {
             case 'p':
+                static bool win = false, cont = false;
                 while (true) 
-                {
+                {            
                     system("cls");
                     displayTitle();
                     printf("\n\tTekan (h) untuk panduan kontrol\n");
                     printf("\n\tTekan (b) untuk kembali ke main menu\n");
                     displayBoard(board);
 
-                    if (isGameOver(board) == true) {
+                    if (isWin(board) == true && win == false)
+                    {
+                        win = true;
+                        printf("\n\tYou win! Lanjutkan permainan (y/n)?\n");
+                        input = getch();
+
+                        while(input != 'y')
+                        {
+                            if(input == 'n')
+                                return cont = true;
+                            else
+                            {
+                                printf("\t\nInput invalid! Silahkan coba lagi.");
+                                continue;
+                            }
+                        }
+
+                        if(input == 'y')
+                            continue;
+                    }
+
+                    if (isGameOver(board) == true || cont == true) {
                         extern int jumlahskor;
                         dataplayer finalscore;
                         finalscore.skor = jumlahskor;
