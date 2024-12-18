@@ -30,6 +30,11 @@ int main() {
                     printf("\n\tTekan (h) untuk panduan kontrol\n");
                     printf("\n\tTekan (b) untuk kembali ke main menu\n");
                     displayBoard(board);
+                    char player_name[maks];
+                    int score = 0;
+                    printf("Masukkan nama Anda: ");
+                    fgets(player_name, maks, stdin);
+                    player_name[strcspn(player_name, "\n")] = 0; //nah
 
                     if (isWin(board) == true && win == false)
                     {
