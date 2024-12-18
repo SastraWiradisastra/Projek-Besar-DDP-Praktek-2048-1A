@@ -1,6 +1,6 @@
 #ifndef SAVE_H
 #define SAVE_H
-
+#define maks 10
 typedef struct {
     int skor; 
     char nama[15];
