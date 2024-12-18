@@ -7,6 +7,7 @@ typedef struct {
 } dataplayer;
 
 void inputscore(dataplayer input);
+void save_score(const char *player, int score);
 void tampil();
 void sorting();
 
