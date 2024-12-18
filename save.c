@@ -42,6 +42,17 @@ void sorting(dataplayer data[], int y)
     }
 }
 
+void save_score(const char *player, int score) {
+    FILE *file = fopen(namafile, "a");
+    if (file == NULL) {
+        perror("Error opening file");
+        return;
+    }
+    fprintf(file, "%s: %d\n", player, score);
+    fclose(file);
+    printf("Skor Anda telah disimpan: %d\n", score);
+}
+
 void tampil()
 {
     dataplayer tampscore[100];
